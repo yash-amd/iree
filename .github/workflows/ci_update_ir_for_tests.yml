@@ -122,7 +122,7 @@ jobs:
         if: env.MLIR_FOUND == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.iree_pr_check }}
+          token: ${{ secrets.IREE_PR_CHECK }}
           commit-message: "Update MLIR URL for ${{ matrix.model.model_name }}"
           committer: GitHub Actions <actions@github.com>
           author: GitHub Actions <actions@github.com>
