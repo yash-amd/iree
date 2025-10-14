@@ -97,6 +97,7 @@ jobs:
           JSON_FILE="${{ matrix.model.json_path }}"
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
+          echo "new json file is as follows"
           cat $JSON_FILE
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
