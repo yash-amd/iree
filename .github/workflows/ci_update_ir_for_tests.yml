@@ -83,7 +83,7 @@ jobs:
       - name: Update JSON file
         if: env.MLIR_FOUND == 'true'
         run: |
-          # set -euo pipefail
+          set -euo pipefail
           # JSON_FILE="${{ matrix.model.json_path }}"
           # NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           # jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
@@ -94,23 +94,25 @@ jobs:
           # git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          set -euo pipefail
+          # set -euo pipefail
           cat "${{ matrix.model.json_path }}"
           JSON_FILE="${{ matrix.model.json_path }}"
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
-          git branch
-          git add "$JSON_FILE"
-          git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
-          git status
+          # git branch
+          # git add "$JSON_FILE"
+          # git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
+          # git status
 
 
       - name: Create PR
         if: env.MLIR_FOUND == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.IREE }}
           commit-message: "Update MLIR URL for ${{ matrix.model.model_name }}"
           title: "Update MLIR URL for ${{ matrix.model.model_name }}"
           branch: "update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}"
+          add-paths: |
+            "tests/external/iree-test-suites/torch_models/llama_8b_fp8/modules/*.json"
           base: main
