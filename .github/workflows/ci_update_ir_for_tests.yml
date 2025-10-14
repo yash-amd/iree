@@ -91,19 +91,16 @@ jobs:
           NEW_MLIR_URL=${{ env.NEW_MLIR_URL }}
 
           python - <<EOF
-            import json
+import json
 
-            json_file = "${JSON_FILE}"
-            with open(json_file, "r") as f:
-                data = json.load(f)
-
-            data["mlir"] = "${NEW_MLIR_URL}"
-
-            with open(json_file, "w") as f:
-                json.dump(data, f, indent=2)
-
-            print(f"Updated {json_file} with new MLIR URL: {data['mlir']}")
-            EOF
+json_file = "${JSON_FILE}"
+with open(json_file, "r") as f:
+    data = json.load(
+data["mlir"] = "${NEW_MLIR_URL
+with open(json_file, "w") as f:
+    json.dump(data, f, indent=
+print(f"Updated {json_file} with new MLIR URL: {data['mlir']}")
+EOF
 
       - name: Commit and create Pull Request
         if: env.MLIR_FOUND == 'true'
