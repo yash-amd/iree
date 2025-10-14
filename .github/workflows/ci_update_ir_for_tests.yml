@@ -7,8 +7,9 @@
 name: CI - Update Latest IR
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
+  pull_request:
+    branches:
+        main
 
 permissions:
   contents: write
