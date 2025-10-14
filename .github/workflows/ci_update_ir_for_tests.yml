@@ -70,7 +70,7 @@ jobs:
           mkdir -p output_artifacts/output_${{ matrix.model.model_name }}
           DATE=$(date -u '+%Y-%m-%d')
           LOCAL_PATH="output_artifacts/output_${{ matrix.model.model_name }}/fetched.mlir"
-          MLIR_URL="https://sharkpublic.blob.core.windows.net/sharkpublic/iree-test-suites/torch-models/${{ matrix.model.model_name }}/bs4_${DATE}.mlir"
+          MLIR_URL="https://sharkpublic.blob.core.windows.net/sharkpublic/yrathore/mlir/${{ matrix.model.model_name }}_${DATE}.mlir"
 
           echo "Checking for MLIR file at $MLIR_URL"
           if curl -sfL -o "$LOCAL_PATH" "$MLIR_URL"; then
@@ -78,6 +78,7 @@ jobs:
             echo "NEW_MLIR_URL=$MLIR_URL" >> $GITHUB_ENV
             echo "MLIR file found and downloaded successfully."
           else
+            exit 0
             echo "No MLIR found for today: $MLIR_URL"
             echo "MLIR_FOUND=false" >> $GITHUB_ENV
           fi
