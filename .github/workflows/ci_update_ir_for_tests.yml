@@ -122,7 +122,7 @@ jobs:
         if: env.MLIR_FOUND == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.iree_pr_check }}
           commit-message: "Update MLIR URL for ${{ matrix.model.model_name }}"
           committer: GitHub Actions <actions@github.com>
           author: GitHub Actions <actions@github.com>
@@ -137,45 +137,3 @@ jobs:
             (Automated update from scheduled workflow.)
           branch: ${{ env.PR_BRANCH }}
           base: main
-
-#       - name: Update JSON file with new MLIR URL
-#         if: env.MLIR_FOUND == 'true'
-#         run: |
-#           JSON_FILE=${{ matrix.model.json_path }}
-#           echo "Updating JSON: $JSON_FILE"
-#           NEW_MLIR_URL=${{ env.NEW_MLIR_URL }}
-
-#           python - <<'EOF'
-#             import json, os
-
-#             json_file = os.environ["JSON_FILE"]
-#             new_mlir_url = os.environ["NEW_MLIR_URL"]
-
-#             with open(json_file, "r") as f:
-#                 data = json.load(f)
-
-#             data["mlir"] = new_mlir_url
-
-#             with open(json_file, "w") as f:
-#                 json.dump(data, f, indent=2)
-
-# print(f"Updated {json_file} with new MLIR URL: {data['mlir']}")
-# EOF
-
-#       - name: Commit and create Pull Request
-#         if: env.MLIR_FOUND == 'true'
-#         uses: peter-evans/create-pull-request@v6
-#         with:
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#           commit-message: "Update MLIR URL for ${{ matrix.model.model_name }}"
-#           committer: GitHub Actions <actions@github.com>
-#           author: GitHub Actions <actions@github.com>
-#           title: "Update MLIR URL for ${{ matrix.model.model_name }}"
-#           body: |
-#             This PR updates the MLIR URL in:
-#             - `${{ matrix.model.json_path }}`
-
-#             to point to:
-#             - `${{ env.NEW_MLIR_URL }}`
-#           branch: update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}
-#           base: main
