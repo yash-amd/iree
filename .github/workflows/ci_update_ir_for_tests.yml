@@ -9,10 +9,6 @@ name: CI - Update Latest IR
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
-    # push:
-    #   branches:
-    #     - main
-    # workflow_dispatch:
 
 permissions:
   contents: write
