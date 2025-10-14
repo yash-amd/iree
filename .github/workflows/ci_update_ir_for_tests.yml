@@ -73,7 +73,7 @@ jobs:
             echo "MLIR_FOUND=true" >> $GITHUB_ENV
             echo "NEW_MLIR_URL=$MLIR_URL" >> $GITHUB_ENV
             echo "MLIR file found and downloaded successfully."
-            rm ouput_artifacts/output_${{ matrix.model.model_name }}/fetched.mlir
+            rm output_artifacts/output_${{ matrix.model.model_name }}/fetched.mlir
           else
             exit 0
             echo "No MLIR found for today: $MLIR_URL"
