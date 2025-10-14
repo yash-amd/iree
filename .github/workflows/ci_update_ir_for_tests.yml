@@ -100,7 +100,7 @@ jobs:
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
           git branch
-          git add "$JSON_FILE"       # <-- only add JSON, not output_artifacts
+          git add "$JSON_FILE"
           git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
           git status
 
