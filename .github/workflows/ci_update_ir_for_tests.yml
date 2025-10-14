@@ -93,7 +93,7 @@ jobs:
           # git add "$JSON_FILE"
           # git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
           set -euo pipefail
-          cat $JSON_FILE
+          cat "${{ matrix.model.json_path }}"
           JSON_FILE="${{ matrix.model.json_path }}"
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
