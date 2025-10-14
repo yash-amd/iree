@@ -95,7 +95,7 @@ jobs:
         if: env.MLIR_FOUND == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.IREE_PR_CHECK }}
+          token: ${{ secrets.IREE }}
           commit-message: "Update MLIR URL for ${{ matrix.model.model_name }}"
           title: "Update MLIR URL for ${{ matrix.model.model_name }}"
           branch: "update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}"
