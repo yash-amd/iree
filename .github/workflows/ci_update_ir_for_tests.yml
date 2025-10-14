@@ -99,22 +99,16 @@ jobs:
           JSON_FILE="${{ matrix.model.json_path }}"
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
-          echo "new json file is as follows"
-          cat $JSON_FILE
-          git status
           git branch
           git add "$JSON_FILE"       # <-- only add JSON, not output_artifacts
-          git status
-          echo "A"
-          cat $JSON_FILE
           git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
-          echo "B"
-          cat $JSON_FILE
           git status
 
 
       - name: Create PR
         if: env.MLIR_FOUND == 'true'
+        run: |
+          git status
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.IREE }}
@@ -122,3 +116,4 @@ jobs:
           title: "Update MLIR URL for ${{ matrix.model.model_name }}"
           branch: "update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}"
           base: main
+
