@@ -48,17 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Create Python venv
-        run: |
-          python -m venv ${VENV_DIR}
-          source ${VENV_DIR}/bin/activate
-          pip install --upgrade pip
-
       - name: Check and download MLIR file
         id: check_mlir
         run: |
@@ -75,9 +64,9 @@ jobs:
             echo "MLIR file found and downloaded successfully."
             rm output_artifacts/output_${{ matrix.model.model_name }}/fetched.mlir
           else
-            exit 0
             echo "No MLIR found for today: $MLIR_URL"
             echo "MLIR_FOUND=false" >> $GITHUB_ENV
+            exit 0
           fi
 
       - name: Update JSON file
