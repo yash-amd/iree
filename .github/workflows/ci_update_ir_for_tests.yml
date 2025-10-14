@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check and download MLIR file
+      - name: Check If New Ir Exists On Sharkpublic
         id: check_mlir
         run: |
           set -e
@@ -69,7 +69,7 @@ jobs:
             exit 0
           fi
 
-      - name: Update JSON file
+      - name: Update Json file
         if: env.MLIR_FOUND == 'true'
         run: |
           set -euo pipefail
@@ -94,6 +94,7 @@ jobs:
             - Updated file: `${{ matrix.model.json_path }}`
           branch: "update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}"
           delete-branch: true
+          signoff: true
           add-paths: |
             ${{ matrix.model.json_path }}
           base: main
