@@ -102,6 +102,7 @@ jobs:
           echo "new json file is as follows"
           cat $JSON_FILE
           git status
+          git branch
           git add "$JSON_FILE"       # <-- only add JSON, not output_artifacts
           git status
           echo "A"
