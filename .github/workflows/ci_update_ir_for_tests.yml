@@ -88,7 +88,7 @@ jobs:
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git restore --staged output_artifacts/
+          git restore --staged .
           git add "$JSON_FILE"
           git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
 
