@@ -116,4 +116,3 @@ jobs:
           title: "Update MLIR URL for ${{ matrix.model.model_name }}"
           branch: "update-mlir-${{ matrix.model.model_name }}-${{ github.run_id }}"
           base: main
-
