@@ -83,14 +83,22 @@ jobs:
       - name: Update JSON file
         if: env.MLIR_FOUND == 'true'
         run: |
+          # set -euo pipefail
+          # JSON_FILE="${{ matrix.model.json_path }}"
+          # NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
+          # jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
+          # git config user.name "github-actions[bot]"
+          # git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # git restore --staged .
+          # git add "$JSON_FILE"
+          # git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
           set -euo pipefail
           JSON_FILE="${{ matrix.model.json_path }}"
           NEW_MLIR_URL="${{ env.NEW_MLIR_URL }}"
           jq --arg url "$NEW_MLIR_URL" '.mlir = $url' "$JSON_FILE" > tmp && mv tmp "$JSON_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git restore --staged .
-          git add "$JSON_FILE"
+          git add "$JSON_FILE"           # <-- only add JSON, not output_artifacts
           git commit -m "Update MLIR URL for ${{ matrix.model.model_name }}" || echo "No changes"
 
       - name: Create PR
