@@ -1,8 +1,8 @@
 {
-  "mlir": "https://sharkpublic.blob.core.windows.net/sharkpublic/iree-test-suites/torch-models/llama_8b_fp8/bs4.mlir",
+  "mlir": "https://sharkpublic.blob.core.windows.net/sharkpublic/yrathore/mlir/llama-8b-fp8_2025-10-14.mlir",
   "compiler_flags": [
-      "--iree-hal-target-device=hip",
-      "--iree-hip-target=gfx942",
-      "--iree-opt-level=O3"
+    "--iree-hal-target-device=hip",
+    "--iree-hip-target=gfx942",
+    "--iree-opt-level=O3"
   ]
 }
